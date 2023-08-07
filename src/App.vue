@@ -1,32 +1,55 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <v-app-bar>
+      <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Vuetify Todo</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+
+    <v-navigation-drawer v-model="drawer">
+      <v-list dense nav class="menu-list" :class="{ 'visible': rail }">
+        <v-list-item-group>
+          <v-list-item v-for="item in menuItems" :key="item.value">
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style>
+.menu-list {
+  display: none; /* Hide the menu list by default */
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.visible {
+  display: block; /* Show the menu list when the 'visible' class is present */
 }
 </style>
+
+<script setup>
+import { ref } from 'vue'
+import router from './router'
+
+const drawer = ref(false)
+const rail = ref(false)
+
+const menuItems = [
+  { icon: 'mdi-home-city', title: 'Todo', value: 'home' },
+  { icon: 'mdi-account', title: 'About', value: 'account' },
+]
+
+const toggleDrawer = () => {
+  drawer.value = !drawer.value
+  rail.value = drawer.value
+}
+</script>
