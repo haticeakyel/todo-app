@@ -66,11 +66,6 @@ export default {
           icon: 'mdi-pencil',
           click: this.handleEdit
         },
-        {
-          text: 'Due Date',
-          icon: 'mdi-calendar',
-          click: this.handleDueDate
-        }
       ]
     };
   },
@@ -84,9 +79,6 @@ export default {
     handleEdit() {
       this.dialogs.edit = true;
     },
-    handleDueDate() {
-      console.log('due date');
-    }
   },
   components: {
     'dialog-delete': DialogDelete,

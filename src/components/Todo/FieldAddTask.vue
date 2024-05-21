@@ -4,7 +4,7 @@
             @keyup.enter="addTask"
 
             class="pa-2"
-            label="Append inner"
+            label="Add your item here"
             append-icon="mdi-plus"
             outlined
             clearable

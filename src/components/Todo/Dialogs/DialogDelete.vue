@@ -10,7 +10,7 @@
           <v-card-title class="text-h5">
             Delete Task?
           </v-card-title>
-          <v-card-text>Are you sure to delete this button?</v-card-text>
+          <v-card-text>Are you sure to delete this task?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
