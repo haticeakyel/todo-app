@@ -1,42 +1,50 @@
 <template>
-<div>
-      <v-list-item
-      @click="$store.commit('doneTask', task.id)"
+  <div>
+    <v-list-item
+      @click="toggleDone"
       :class="{'blue lighten-5': task.done}"
-      >
-        <template>
-          <v-list-item-action>
-            <v-checkbox 
-            :input-value= "task.done"
-            ></v-checkbox>
-          </v-list-item-action>
-       
-        <v-list-item-content>
-          <v-list-item-title
-          :class="{'text-decoration-line-through':task.done}"
-          >{{ task.title }}</v-list-item-title>
-        </v-list-item-content>
-
-        
+    >
       <v-list-item-action>
-        <task-menu :task="task"/>
-        </v-list-item-action>
-      </template>
+        <v-checkbox 
+          v-model="task.done"
+          @change="toggleDone"
+        ></v-checkbox>
+      </v-list-item-action>
 
+      <v-list-item-content>
+        <v-list-item-title :class="{'text-decoration-line-through': task.done}">
+          {{ task.name }}
+        </v-list-item-title>
+      </v-list-item-content>
 
-      </v-list-item>
+      <v-list-item-action>
+        <task-menu :task="task" @update-task="updateTask"/>
+      </v-list-item-action>
+    </v-list-item>
     <v-divider></v-divider>
-    </div>
+  </div>
 </template>
 
 <script>
-import TaskMenu from '@/components/Todo/Dialogs/TaskMenu'
+import TaskMenu from '@/components/Todo/Dialogs/TaskMenu';
 
-export default{
-    props: ['task'],
-    components:{
-      'task-menu': TaskMenu,
+export default {
+  props: {
+    task: {
+      type: Object,
+      required: true
     }
+  },
+  components: {
+    TaskMenu
+  },
+  methods: {
+    toggleDone() {
+      this.$store.dispatch('toggleDoneTask', this.task.id);
+    },
+    updateTask(updatedTask) {
+      this.$store.dispatch('updateTask', updatedTask);
+    }
+  }
 }
-
 </script>

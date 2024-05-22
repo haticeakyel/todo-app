@@ -3,11 +3,8 @@
 
     <field-add-task/>
     <field-list-tasks
-    v-if="$store.state.tasks.length"
     />
-    <no-task
-    v-else
-    />
+    
   </div>
 </template>
 
